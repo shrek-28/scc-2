@@ -31,8 +31,9 @@
         <!-- Hospital Profile -->
         <div class="grid-item bg-gray-50 p-6 rounded-lg shadow-lg border shadow-black bg-opacity-40 border-gray-200 ml-3">
           <h4 class="text-2xl font-semibold mb-4 text-gray-700 text-center">Hospital Profile</h4>
-          <p class="text-gray-600"><strong>Name:</strong> {{ current_user.username }}</p>
-          <p class="text-gray-600"><strong>Address:</strong> Sample Address</p>
+          <p class="text-gray-700"><strong>Name:</strong> {{ current_user.username }}</p>
+          <p class="text-gray-700"><strong>Address:</strong> Sample Address</p>
+          <p class="text-gray-700"><strong>Phone No:</strong> {{current_user.phone_no}}</p>
         </div>
         
         <!-- Past Orders -->
@@ -41,8 +42,8 @@
           {% for order in past_orders %}
             <div class="mb-6 p-4 bg-white border border-gray-300 rounded-md shadow-sm">
               <h5 class="font-bold text-gray-800">{{ order.item }}</h5>
-              <p class="text-gray-600">Amount: {{ order.amount }}</p>
-              <p class="text-gray-600">Vendor: {{ order.vendor }}</p>
+              <p class="text-gray-700">Amount: {{ order.amount }}</p>
+              <p class="text-gray-700">Vendor: {{ order.vendor }}</p>
             </div>
           {% endfor %}
         </div>
@@ -53,11 +54,11 @@
           {% for order in current_orders %}
             <div class="mb-6 p-4 bg-white border border-gray-300 rounded-md shadow-sm">
               <h5 class="font-bold text-gray-800">{{ order.item }}</h5>
-              <p class="text-gray-600">Amount: {{ order.amount }}</p>
+              <p class="text-gray-700">Amount: {{ order.amount }}</p>
               {% if order.status=='out_for_delivery'%}
-              <p class="text-gray-600">Vendor: {{ order.vendor }}</p>
-              
-              <p class="text-gray-600">Out for Delivery</p>
+              <p class="text-gray-700">Vendor: {{ order.vendor }}</p>
+              <p class="text-gray-700">Phone : {{order.phone_no}}</p>              
+              <p class="text-gray-700">Out for Delivery</p>
               {% endif %}
               {% if order.status=='delivered'%}
               <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
