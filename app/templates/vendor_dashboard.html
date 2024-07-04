@@ -1,23 +1,34 @@
 {% extends "base.html" %}
 {% block title %}Vendor Dashboard{% endblock %}
+{% block style %} 
+<style>
+    .hover-expand:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
 {% block content %}
-<div class="container mt-4">
-    <h2>Vendor Dashboard</h2>
-    <div class="row">
-        <div class="col-md-12">
-            {% for order in orders %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ order.item }}</h5>
-                        <p class="card-text">Amount: {{ order.amount }}</p>
-                        <p class="card-text">Hospital: {{ order.hospital_username }}</p>
-                        <form method="POST" action="{{ url_for('routes.checkout_order', order_id=order.id) }}">
-                            <button type="submit" class="btn btn-primary">Checkout for Delivery</button>
-                        </form>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+<div class="bg-cover bg-center h-screen bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500 flex flex-col">
+<nav class="bg-gray-800 w-full p-4 flex justify-between items-center mt-0">
+    <h1 class="text-white text-2xl font-bold">Vendor Dashboard</h1>
+    <a href="/logout"
+    class="bg-[#2f8b90] text-white px-4 py-2 rounded-md hover:bg-[#00ADB5] transition duration-300">Logout</a>
+</nav>
+
+<div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Pending Orders</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for order in orders %}
+            <div class="hover-expand bg-white shadow-lg shadow-black rounded-lg p-6 transition-transform duration-300">
+                <h5 class="text-xl font-bold mb-2 text-gray-800">{{ order.item }}</h5>
+                <p class="text-gray-700 mb-1">Amount: {{ order.amount }}</p>
+                <p class="text-gray-700 mb-3">Hospital: {{ order.hospital_username }}</p>
+                <form method="POST" action="{{ url_for('routes.checkout_order', order_id=order.id) }}">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Checkout for Delivery</button>
+                </form>
+            </div>
+        {% endfor %}
     </div>
+</div>
 </div>
 {% endblock %}

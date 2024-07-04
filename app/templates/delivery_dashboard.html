@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Delivery Dashboard{% endblock %}
 {% block content %}
-<div class="container mt-4">
-    <h2>Delivery Dashboard</h2>
-    <div class="row">
-        <div class="col-md-12">
-            {% for order in orders %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ order.item }}</h5>
-                        <p class="card-text">Amount: {{ order.amount }}</p>
-                        <p class="card-text">Hospital: {{ order.hospital_username }}</p>
-                        <form method="POST" action="{{ url_for('routes.deliver_order', order_id=order.id) }}">
-                            <button type="submit" class="btn btn-success">Mark as Delivered</button>
-                        </form>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+<div class="bg-cover bg-center h-screen bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500 flex flex-col">
+    <nav class="bg-gray-800 w-full p-4 flex justify-between items-center mt-0">
+        <h1 class="text-white text-2xl font-bold">Delivery Dashboard</h1>
+        <a href="/logout"
+        class="bg-[#2f8b90] text-white px-4 py-2 rounded-md hover:bg-[#00ADB5] transition duration-300">Logout</a>
+    </nav>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {% for order in orders %}
+            <div class="bg-white p-4 rounded-lg shadow-lg shadow-black transform transition duration-300 hover:scale-105">
+                <h5 class="text-xl font-semibold">{{ order.item }}</h5>
+                <p class="text-gray-700">Amount: {{ order.amount }}</p>
+                <p class="text-gray-700">Hospital: {{ order.hospital_username }}</p>
+                <form method="POST" action="{{ url_for('routes.deliver_order', order_id=order.id) }}">
+                    <button type="submit" class="bg-[#00ADB5] text-white px-4 py-2 rounded mt-2">Mark as Delivered</button>
+                </form>
+            </div>
+        {% endfor %}
     </div>
 </div>
+
 {% endblock %}
-,
+
