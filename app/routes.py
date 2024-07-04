@@ -76,6 +76,17 @@ def hospital_dashboard():
     current_orders = Order.query.filter_by(hospital_username=current_user.username).filter(or_( Order.status == 'current', Order.status == 'out_for_delivery')).all()
     return render_template('hospital_dashboard.html', title='Hospital Dashboard', form=form, past_orders=past_orders, current_orders=current_orders)
 
+@bp.route("/call_del_order/<int:order_id>")
+def call_del_order(order_id):
+    del_order(order_id)
+    return redirect(url_for('routes.hospital_dashboard'))
+
+def del_order(order_id :int):
+    order = Order.query.get(order_id)
+    if order:
+        order.status = "removed"
+    
+
 @bp.route("/vendor_dashboard")
 def vendor_dashboard():
     if not current_user.is_authenticated:
