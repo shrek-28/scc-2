@@ -40,4 +40,41 @@
         {% endfor %}
     </table>
 </div>
+<br>
+<p>All Orders: </p>
+
+<div class = "table-container">
+    <table>
+        <tr>
+            <td>
+                <b>ID</b>
+            </td>
+            <td>
+                <b>Items</b>
+            </td>
+            <td>
+                <b>Amount</b>
+            </td>
+            <td>
+                <b>Status</b>
+            </td>
+        </tr>
+        {% for order in all_orders %}
+        <tr>
+            <td>
+                {{order.id}}
+            </td>
+            <td>
+                {{order.item}}
+            </td>
+            <td>
+                {{order.amount}}
+            </td>
+            <td>
+                {{order.status}}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
