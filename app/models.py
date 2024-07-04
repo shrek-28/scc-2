@@ -22,6 +22,7 @@ class Order(db.Model):
     hospital_username = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
     status = db.Column(db.String(50), nullable=False, default='current')
     urgency = db.Column(db.Boolean, default=False)
+    vendor = db.Column(db.String(80), nullable=True)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
