@@ -72,8 +72,8 @@ def hospital_dashboard():
         db.session.commit()
         flash('Your order has been placed!', 'success')
         return redirect(url_for('routes.hospital_dashboard'))
-    past_orders = Order.query.filter_by(hospital_username=current_user.username, status='past').all()
-    current_orders = Order.query.filter_by(hospital_username=current_user.username).filter(or_( Order.status == 'current', Order.status == 'out_for_delivery')).all()
+    past_orders = Order.query.filter_by(hospital_username=current_user.username).filter(Order.status == 'past').all()
+    current_orders = Order.query.filter_by(hospital_username=current_user.username).filter(or_( Order.status == 'current', Order.status == 'out_for_delivery', Order.status == 'delivered')).all()
     return render_template('hospital_dashboard.html', title='Hospital Dashboard', form=form, past_orders=past_orders, current_orders=current_orders)
 
 @bp.route("/call_del_order/<int:order_id>")
@@ -84,7 +84,8 @@ def call_del_order(order_id):
 def del_order(order_id :int):
     order = Order.query.get(order_id)
     if order:
-        order.status = "removed"
+        order.status = 'removed'
+        db.session.commit()
     
 
 @bp.route("/vendor_dashboard")
@@ -137,7 +138,7 @@ def order_received(order_id):
     if current_user.user_type != 'hospital':
         return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
-    order.status = 'past'
+    order.status = 'received'
     db.session.commit()
     flash('Order received', 'success')
     return redirect(url_for('routes.hospital_dashboard'))

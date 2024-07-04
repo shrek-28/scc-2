@@ -16,7 +16,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ order.item }}</h5>
                         <p class="card-text">Amount: {{ order.amount }}</p>
-                        <p class="card-text">Vendor: {{ order.vendor }}</p>
+                        <p class="card-text">Vendor: {{ order.vendor }}</p> 
+                        <p class="card-text">(DB) Status: {{ order.status }}</p>
                         <form action = "{{url_for('routes.call_del_order', order_id = order.id)}}">
                             <button type = "submit">del</button>
                         </form>
@@ -32,10 +33,16 @@
                         <h5 class="card-title">{{ order.item }}</h5>
                         <p class="card-text">Amount: {{ order.amount }}</p>
                         <p class="card-text">Vendor: {{ order.vendor }}</p>
+                        {% if order.status == "out_for_delivery" %}
+                        <p class="card-text">Out for Delivery!</p>
+                        {% else %}
+                        {% if order.status == "delivered" %}
                         <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
                             {{ form.hidden_tag() }}
                             <button type="submit" class="btn btn-success">Received</button>
                         </form>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
