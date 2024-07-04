@@ -72,7 +72,7 @@ def hospital_dashboard():
         db.session.commit()
         flash('Your order has been placed!', 'success')
         return redirect(url_for('routes.hospital_dashboard'))
-    past_orders = Order.query.filter_by(hospital_username=current_user.username).filter(Order.status == 'past').all()
+    past_orders = Order.query.filter_by(hospital_username=current_user.username).filter(Order.status == 'received').all()
     current_orders = Order.query.filter_by(hospital_username=current_user.username).filter(or_( Order.status == 'current', Order.status == 'out_for_delivery', Order.status == 'delivered')).all()
     return render_template('hospital_dashboard.html', title='Hospital Dashboard', form=form, past_orders=past_orders, current_orders=current_orders)
 
