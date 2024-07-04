@@ -1,0 +1,4 @@
+# Add these lines to .gitignore
+__pycache__/
+*.pyc
+instance/site.db
