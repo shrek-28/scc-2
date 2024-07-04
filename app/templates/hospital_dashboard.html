@@ -54,7 +54,11 @@
             <div class="mb-6 p-4 bg-white border border-gray-300 rounded-md shadow-sm">
               <h5 class="font-bold text-gray-800">{{ order.item }}</h5>
               <p class="text-gray-600">Amount: {{ order.amount }}</p>
+              {% if order.status=='out_for_delivery'%}
               <p class="text-gray-600">Vendor: {{ order.vendor }}</p>
+              <p>Phone:{{ order.phone_no}}</p>
+              <p class="text-gray-600">Out for Delivery</p>
+              {% endif %}
               {% if order.status=='delivered'%}
               <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
                 {{ form.hidden_tag() }}
