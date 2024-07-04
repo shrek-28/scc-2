@@ -59,7 +59,7 @@ def dashboard():
 @login_required
 def hospital_dashboard():
     if current_user.user_type != 'hospital':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     form = OrderForm()
     if form.validate_on_submit():
         order = Order(item=form.item.data, amount=form.amount.data, hospital_username=current_user.username, urgency=form.urgency.data)
@@ -75,7 +75,7 @@ def hospital_dashboard():
 @login_required
 def vendor_dashboard():
     if current_user.user_type != 'vendor':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='current').all()
     return render_template('vendor_dashboard.html', title='Vendor Dashboard', orders=orders)
 
@@ -83,7 +83,7 @@ def vendor_dashboard():
 @login_required
 def delivery_dashboard():
     if current_user.user_type != 'delivery':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='out_for_delivery').all()
     return render_template('delivery_dashboard.html', title='Delivery Dashboard', orders=orders)
 
@@ -91,7 +91,7 @@ def delivery_dashboard():
 @login_required
 def checkout_order(order_id):
     if current_user.user_type != 'vendor':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
     order.status = 'out_for_delivery'
     db.session.commit()
@@ -102,7 +102,7 @@ def checkout_order(order_id):
 @login_required
 def deliver_order(order_id):
     if current_user.user_type != 'delivery':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
     order.status = 'delivered'
     db.session.commit()
@@ -113,9 +113,13 @@ def deliver_order(order_id):
 @login_required
 def order_received(order_id):
     if current_user.user_type != 'hospital':
-        return redirect(url_for('routes.dashboard'))
+        return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
     order.status = 'past'
     db.session.commit()
     flash('Order received', 'success')
     return redirect(url_for('routes.hospital_dashboard'))
+
+@bp.route("/access_denied")
+def access_denied():
+    return render_template('access_denied.html')
