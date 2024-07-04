@@ -43,6 +43,7 @@ class User(db.Model, UserMixin):
     user_type = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50),nullable = True)
     phone_no = db.Column(db.String(10),nullable = True)
+    address = db.Column(db.String(80),nullable = True)
     
     def __repr__(self):
         return f"User('{self.username}', '{self.user_type}')"

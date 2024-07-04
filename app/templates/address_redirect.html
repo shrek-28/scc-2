@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Details{% endblock %}
+{% block content %}
+<div class="bg-cover bg-center h-screen bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500 flex items-center justify-center">
+<div class="w-full max-w-md">
+    <div class="bg-white shadow-lg rounded-lg p-8 shadow-black">
+        <h2 class="text-2xl font-bold text-center mb-6">Contact Details</h2>
+        <form method="POST" action="{{ url_for('routes.address_redirect', user_id=user_id) }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+                {{ form.email.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.email(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm") }}
+            </div>
+            <div class="mb-4">
+                {{ form.address.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.address(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#00ADB5] focus:border[#00ADB5] sm:text-sm") }}
+            </div>
+            <div class="mt-6">
+                {{ form.submit(class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-700 transition duration-150") }}
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

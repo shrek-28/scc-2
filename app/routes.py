@@ -2,11 +2,10 @@ from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Order
-from app.forms import RegistrationForm, LoginForm, OrderForm
+from app.forms import RegistrationForm, LoginForm, OrderForm, AddressEmailForm
 from sqlalchemy import or_
 
 bp = Blueprint('routes', __name__)
-
 @bp.route("/")
 @bp.route("/home")
 def home():
@@ -20,13 +19,34 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, password_hash=hashed_password, user_type=form.user_type.data, phone_no = form.phone_no.data)
+        global temp_user_id
+        
         db.session.add(user)
+        temp_user_id = user.id
         db.session.commit()
+        if user.user_type != 'delivery':
+            return redirect(url_for('routes.address_redirect', user_id = user.id))
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('routes.login'))
     else:
         print(form.errors)
     return render_template('register.html', title='Register', form=form)
+
+@bp.route("/address_redirect/<int:user_id>", methods=['GET', 'POST'])
+def address_redirect(user_id):
+    form = AddressEmailForm()
+    user = User.query.get(user_id)
+    if not user:
+        redirect(url_for('routes.register'))
+    if form.validate_on_submit():
+        user.email = form.email.data
+        user.address = form.address.data
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('routes.login'))
+    else:
+        print(form.errors)
+    return render_template('address_redirect.html', form=form, user_id = user_id)
 
 @bp.route("/login", methods=['GET', 'POST'])
 def login():

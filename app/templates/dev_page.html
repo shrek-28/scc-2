@@ -34,10 +34,13 @@
                 <b>User_Type</b>
             </td>
             <td>
+                <b>Phone No</b>
+            </td>
+            <td>
                 <b>Email</b>
             </td>
             <td>
-                <b>Phone No</b>
+                <b>Address</b>
             </td>
             <td>
                 <b>Action</b>
@@ -53,10 +56,13 @@
                 {{user.user_type}}
             </td>
             <td>
+                {{user.phone_no}}
+            </td>
+            <td>
                 {{user.email}}
             </td>
             <td>
-                {{user.phone_no}}
+                {{user.address}}
             </td>
             <td>
                 <form action="{{url_for('routes.dev_user_delete', user_id = user.id)}}">
