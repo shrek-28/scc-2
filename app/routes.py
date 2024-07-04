@@ -14,7 +14,7 @@ def home():
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('routes.home'))
+        return redirect(url_for('routes.dashboard'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -28,7 +28,7 @@ def register():
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('routes.home'))
+        return redirect(url_for('routes.dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -46,9 +46,10 @@ def logout():
     return redirect(url_for('routes.home'))
 
 @bp.route("/dashboard")
-@login_required
 def dashboard():
-    if current_user.username == 'dev':
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
+    elif current_user.username == 'dev':
         return redirect(url_for('routes.dev_page'))
     elif current_user.user_type == 'hospital':
         return redirect(url_for('routes.hospital_dashboard'))
@@ -58,8 +59,9 @@ def dashboard():
         return redirect(url_for('routes.delivery_dashboard'))
 
 @bp.route("/hospital_dashboard", methods=['GET', 'POST'])
-@login_required
 def hospital_dashboard():
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'hospital':
         return redirect(url_for('routes.access_denied'))
     form = OrderForm()
@@ -74,24 +76,27 @@ def hospital_dashboard():
     return render_template('hospital_dashboard.html', title='Hospital Dashboard', form=form, past_orders=past_orders, current_orders=current_orders)
 
 @bp.route("/vendor_dashboard")
-@login_required
 def vendor_dashboard():
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'vendor':
         return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='current').all()
     return render_template('vendor_dashboard.html', title='Vendor Dashboard', orders=orders)
 
 @bp.route("/delivery_dashboard")
-@login_required
 def delivery_dashboard():
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'delivery':
         return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='out_for_delivery').all()
     return render_template('delivery_dashboard.html', title='Delivery Dashboard', orders=orders)
 
 @bp.route("/checkout_order/<int:order_id>", methods=['POST'])
-@login_required
 def checkout_order(order_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'vendor':
         return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
@@ -101,8 +106,9 @@ def checkout_order(order_id):
     return redirect(url_for('routes.vendor_dashboard'))
 
 @bp.route("/deliver_order/<int:order_id>", methods=['POST'])
-@login_required
 def deliver_order(order_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'delivery':
         return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
@@ -112,8 +118,9 @@ def deliver_order(order_id):
     return redirect(url_for('routes.delivery_dashboard'))
 
 @bp.route("/order_received/<int:order_id>", methods=['POST'])
-@login_required
 def order_received(order_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if current_user.user_type != 'hospital':
         return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
@@ -127,8 +134,9 @@ def access_denied():
     return render_template('access_denied.html')
 
 @bp.route("/dev_page")
-@login_required
 def dev_page():
+    if not current_user.is_authenticated:
+        return redirect(url_for('routes.login'))
     if  current_user.username != 'dev':
         return redirect(url_for('routes.access_denied'))
     
