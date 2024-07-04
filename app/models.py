@@ -56,6 +56,7 @@ class Order(db.Model):
     urgency = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     vendor = db.Column(db.String(80), nullable = True)
+    phone_no = db.Column(db.String(10), unique=True, nullable=False)
 
     def __repr__(self):
         return f"Order('{self.item}', '{self.amount}', '{self.status}')"

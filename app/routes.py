@@ -115,6 +115,7 @@ def checkout_order(order_id):
     order = Order.query.get_or_404(order_id)
     order.status = 'out_for_delivery'
     order.vendor = current_user.username
+    order.phone_no = current_user.phone_no
     db.session.commit()
     flash('Order checked out for delivery', 'success')
     return redirect(url_for('routes.vendor_dashboard'))
