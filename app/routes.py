@@ -3,6 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Order
 from app.forms import RegistrationForm, LoginForm, OrderForm
+from sqlalchemy import or_
 
 bp = Blueprint('routes', __name__)
 
@@ -72,7 +73,7 @@ def hospital_dashboard():
         flash('Your order has been placed!', 'success')
         return redirect(url_for('routes.hospital_dashboard'))
     past_orders = Order.query.filter_by(hospital_username=current_user.username, status='past').all()
-    current_orders = Order.query.filter_by(hospital_username=current_user.username, status='current').all()
+    current_orders = Order.query.filter_by(hospital_username=current_user.username).filter(or_( Order.status == 'current', Order.status == 'out_for_delivery')).all()
     return render_template('hospital_dashboard.html', title='Hospital Dashboard', form=form, past_orders=past_orders, current_orders=current_orders)
 
 @bp.route("/vendor_dashboard")
@@ -101,6 +102,7 @@ def checkout_order(order_id):
         return redirect(url_for('routes.access_denied'))
     order = Order.query.get_or_404(order_id)
     order.status = 'out_for_delivery'
+    order.vendor = current_user.username
     db.session.commit()
     flash('Order checked out for delivery', 'success')
     return redirect(url_for('routes.vendor_dashboard'))
