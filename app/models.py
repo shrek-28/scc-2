@@ -42,7 +42,8 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(120), nullable=False)
     user_type = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
-
+    phone_no = db.Column(db.String(10), unique=True, nullable=False)
+    
     def __repr__(self):
         return f"User('{self.username}', '{self.user_type}')"
 
