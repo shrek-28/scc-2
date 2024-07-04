@@ -140,6 +140,7 @@ def order_received(order_id):
     order = Order.query.get_or_404(order_id)
     order.status = 'received'
     db.session.commit()
+    Order.update_csv()  
     flash('Order received', 'success')
     return redirect(url_for('routes.hospital_dashboard'))
 
