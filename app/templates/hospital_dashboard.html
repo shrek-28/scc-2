@@ -55,10 +55,12 @@
               <h5 class="font-bold text-gray-800">{{ order.item }}</h5>
               <p class="text-gray-600">Amount: {{ order.amount }}</p>
               <p class="text-gray-600">Vendor: {{ order.vendor }}</p>
+              {% if order.status=='delivered'%}
               <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
                 {{ form.hidden_tag() }}
                 <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Received</button>
               </form>
+              {% endif %}
             </div>
           {% endfor %}
         </div>
