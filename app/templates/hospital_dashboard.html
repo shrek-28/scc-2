@@ -56,7 +56,7 @@
               <p class="text-gray-600">Amount: {{ order.amount }}</p>
               {% if order.status=='out_for_delivery'%}
               <p class="text-gray-600">Vendor: {{ order.vendor }}</p>
-              <p>Phone:{{ order.phone_no}}</p>
+              
               <p class="text-gray-600">Out for Delivery</p>
               {% endif %}
               {% if order.status=='delivered'%}

@@ -33,6 +33,15 @@
             <td>
                 <b>User_Type</b>
             </td>
+            <td>
+                <b>Email</b>
+            </td>
+            <td>
+                <b>Phone No</b>
+            </td>
+            <td>
+                <b>Action</b>
+            </td>
         </tr>
         {% for user in all_users %}
         {% if user.username != 'admin' %}
@@ -42,6 +51,12 @@
             </td>
             <td>
                 {{user.user_type}}
+            </td>
+            <td>
+                {{user.email}}
+            </td>
+            <td>
+                {{user.phone_no}}
             </td>
             <td>
                 <form action="{{url_for('routes.dev_user_delete', user_id = user.id)}}">
@@ -70,6 +85,9 @@
             </td>
             <td>
                 <b>Status</b>
+            </td>
+            <td>
+                <b>Action</b>
             </td>
         </tr>
         {% for order in all_orders %}

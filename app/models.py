@@ -41,8 +41,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(120), nullable=False)
     user_type = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), nullable=False)
-    phone_no = db.Column(db.String(10), unique=True, nullable=False)
+    email = db.Column(db.String(50),nullable = True)
+    phone_no = db.Column(db.String(10),nullable = True)
     
     def __repr__(self):
         return f"User('{self.username}', '{self.user_type}')"
@@ -56,7 +56,6 @@ class Order(db.Model):
     urgency = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     vendor = db.Column(db.String(80), nullable = True)
-    phone_no = db.Column(db.String(10), unique=True, nullable=False)
 
     def __repr__(self):
         return f"Order('{self.item}', '{self.amount}', '{self.status}')"

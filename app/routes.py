@@ -19,11 +19,13 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, password_hash=hashed_password, user_type=form.user_type.data)
+        user = User(username=form.username.data, password_hash=hashed_password, user_type=form.user_type.data, phone_no = form.phone_no.data)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('routes.login'))
+    else:
+        print(form.errors)
     return render_template('register.html', title='Register', form=form)
 
 @bp.route("/login", methods=['GET', 'POST'])
@@ -39,6 +41,8 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('routes.dashboard'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
+    else:
+        print(form.errors)
     return render_template('login.html', title='Login', form=form)
 
 @bp.route("/logout")
@@ -115,7 +119,6 @@ def checkout_order(order_id):
     order = Order.query.get_or_404(order_id)
     order.status = 'out_for_delivery'
     order.vendor = current_user.username
-    order.phone_no = current_user.phone_no
     db.session.commit()
     flash('Order checked out for delivery', 'success')
     return redirect(url_for('routes.vendor_dashboard'))

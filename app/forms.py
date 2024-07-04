@@ -8,7 +8,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     user_type = SelectField('Type of Service', choices=[('hospital', 'Hospital'), ('vendor', 'Vendor'), ('delivery', 'Delivery')])
     submit = SubmitField('Register')
-    email = EmailField('Email address', validators=[DataRequired(), Email()])
+    #email = EmailField('Email address', validators=[DataRequired(), Email()])
     phone_no = StringField('Phone Number', validators=[DataRequired(), Length(max=10)])
 
     def validate_username(self, username):
