@@ -1,0 +1,4 @@
+id,item,amount,hospital_username,status,urgency,timestamp
+1,Paracetamol,14.0,new_hospital,removed,True,2024-07-04T10:21:49.449065
+2,Paracetamol,15.0,new_hospital,removed,True,2024-07-04T10:32:54.219803
+3,Paracetamol,10.0,new_hospital,received,False,2024-07-04T14:51:12.450819

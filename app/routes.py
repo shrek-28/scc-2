@@ -158,3 +158,19 @@ def dev_page():
     all_users = User.query.all()
     all_orders = Order.query.all()
     return render_template('dev_page.html', all_users = all_users, all_orders = all_orders)
+
+@bp.route("/dev_order_delete/<int:order_id>")
+def dev_order_delete(order_id):
+    order = Order.query.get(order_id)
+    if order:
+        db.session.delete(order)
+        db.session.commit()
+    return redirect(url_for('routes.dev_page'))
+
+@bp.route("/dev_user_delete/<int:user_id>")
+def dev_user_delete(user_id):
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+    return redirect(url_for('routes.dev_page'))

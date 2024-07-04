@@ -26,6 +26,14 @@
 
 <div class = "table-container">
     <table>
+        <tr>
+            <td>
+                <b>Username</b>
+            </td>
+            <td>
+                <b>User_Type</b>
+            </td>
+        </tr>
         {% for user in all_users %}
         {% if user.username != 'admin' %}
         <tr>
@@ -34,6 +42,11 @@
             </td>
             <td>
                 {{user.user_type}}
+            </td>
+            <td>
+                <form action="{{url_for('routes.dev_user_delete', user_id = user.id)}}">
+                    <button type = "submit">Delete</button>
+                </form>
             </td>
         </tr>
         {% endif %}
@@ -72,6 +85,12 @@
             </td>
             <td>
                 {{order.status}}
+            </td>
+
+            <td>
+                <form action="{{url_for('routes.dev_order_delete', order_id = order.id)}}">
+                    <button type = "submit">Delete</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
