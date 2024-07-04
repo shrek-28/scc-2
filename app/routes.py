@@ -156,5 +156,5 @@ def dev_page():
         return redirect(url_for('routes.access_denied'))
     
     all_users = User.query.all()
-    print(type(all_users))
-    return render_template('dev_page.html', all_users = all_users)
+    all_orders = Order.query.all()
+    return render_template('dev_page.html', all_users = all_users, all_orders = all_orders)
