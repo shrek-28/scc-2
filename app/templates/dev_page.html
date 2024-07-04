@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .table-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; /* Full width of the container */
+    }
+    table {
+        border-collapse: collapse;
+        width: 60%; /* Adjust the width as needed */
+        max-width: 600px; /* Set a maximum width to avoid too large tables */
+        margin: 20px auto; /* Center the table horizontally */
+        text-align: center; /* Center text in the table cells */
+    }
+    td {
+        padding: 10px;
+        border: 1px solid black; /* Optional: for visual separation */
+    }
+</style>
+
+<h2> DEV PAGE</h2>
+<br>
+<p>All registered users: </p>
+
+<div class = "table-container">
+    <table>
+        {% for user in all_users %}
+        {% if user.username != 'admin' %}
+        <tr>
+            <td>
+                {{user.username}}
+            </td>
+            <td>
+                {{user.user_type}}
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

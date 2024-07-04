@@ -48,7 +48,9 @@ def logout():
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    if current_user.user_type == 'hospital':
+    if current_user.username == 'dev':
+        return redirect(url_for('routes.dev_page'))
+    elif current_user.user_type == 'hospital':
         return redirect(url_for('routes.hospital_dashboard'))
     elif current_user.user_type == 'vendor':
         return redirect(url_for('routes.vendor_dashboard'))
@@ -123,3 +125,13 @@ def order_received(order_id):
 @bp.route("/access_denied")
 def access_denied():
     return render_template('access_denied.html')
+
+@bp.route("/dev_page")
+@login_required
+def dev_page():
+    if  current_user.username != 'dev':
+        return redirect(url_for('routes.access_denied'))
+    
+    all_users = User.query.all()
+    print(type(all_users))
+    return render_template('dev_page.html', all_users = all_users)
