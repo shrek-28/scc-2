@@ -1,0 +1,101 @@
+id,item,amount,hospital_username,status,urgency,timestamp
+1,MRI machine,9,hospital2,delivered,False,2024-07-01T16:37:44.259272
+2,MRI machine,10,hospital1,delivered,True,2024-06-13T16:49:03.259272
+3,medicine,3310,hospital3,pending,False,2024-06-28T19:38:19.259272
+4,ventilator,5,hospital5,pending,False,2024-06-23T06:11:22.259272
+5,gloves,3497,hospital2,delivered,True,2024-06-13T09:21:56.259272
+6,medicine,6048,hospital4,delivered,True,2024-06-23T15:06:43.259272
+7,medicine,6558,hospital1,delivered,True,2024-06-20T19:18:28.259272
+8,MRI machine,3,hospital2,processing,True,2024-06-29T06:23:07.259272
+9,MRI machine,4,hospital3,processing,True,2024-06-22T07:48:53.259272
+10,medicine,2611,hospital5,processing,False,2024-06-21T16:24:26.259272
+11,medicine,2286,hospital1,processing,True,2024-06-28T18:35:12.259272
+12,ventilator,1,hospital4,pending,True,2024-06-09T21:51:09.259272
+13,masks,9893,hospital5,processing,True,2024-06-28T02:27:04.259272
+14,gloves,9419,hospital3,pending,True,2024-06-24T18:32:37.259272
+15,gloves,771,hospital2,processing,True,2024-07-04T00:58:01.259272
+16,masks,8130,hospital1,delivered,False,2024-06-12T10:36:56.259272
+17,MRI machine,8,hospital2,processing,False,2024-06-12T03:03:43.259272
+18,ventilator,8,hospital1,processing,False,2024-06-19T15:16:59.259272
+19,oxygen cylinder,9319,hospital4,pending,True,2024-06-15T06:21:34.259272
+20,oxygen cylinder,8530,hospital2,delivered,False,2024-06-29T00:22:34.259272
+21,ventilator,4,hospital4,pending,True,2024-06-07T20:38:36.259272
+22,oxygen cylinder,8408,hospital2,processing,False,2024-06-12T03:55:33.259272
+23,masks,1420,hospital3,delivered,False,2024-07-02T14:23:09.259272
+24,gloves,4639,hospital5,processing,False,2024-06-20T02:43:52.259272
+25,oxygen cylinder,4808,hospital4,pending,False,2024-06-27T10:20:40.259272
+26,oxygen cylinder,8906,hospital5,processing,False,2024-06-10T05:48:21.259272
+27,masks,6704,hospital5,processing,True,2024-06-22T09:05:05.259272
+28,medicine,313,hospital2,delivered,False,2024-06-11T20:14:56.259272
+29,gloves,6599,hospital4,pending,False,2024-06-28T17:24:58.259272
+30,gloves,9005,hospital4,pending,False,2024-07-05T05:16:00.259272
+31,ventilator,10,hospital2,pending,False,2024-07-02T02:37:41.259272
+32,gloves,6753,hospital3,processing,False,2024-06-21T03:27:59.259272
+33,ventilator,2,hospital1,delivered,False,2024-06-27T18:02:14.259272
+34,MRI machine,2,hospital5,processing,False,2024-06-11T14:35:01.259272
+35,MRI machine,1,hospital5,pending,True,2024-06-30T17:38:58.259272
+36,oxygen cylinder,7464,hospital2,pending,False,2024-06-20T20:22:00.259272
+37,MRI machine,8,hospital2,delivered,False,2024-07-04T08:41:27.259272
+38,oxygen cylinder,4557,hospital3,pending,True,2024-06-10T09:53:13.259272
+39,gloves,6501,hospital1,pending,False,2024-06-29T18:07:01.259272
+40,oxygen cylinder,5186,hospital1,pending,True,2024-06-23T07:40:14.259272
+41,masks,1855,hospital2,delivered,False,2024-06-26T05:00:37.259272
+42,masks,8222,hospital4,delivered,True,2024-06-29T10:53:32.259272
+43,medicine,4128,hospital1,processing,True,2024-06-13T10:06:22.259272
+44,oxygen cylinder,5427,hospital1,delivered,False,2024-06-15T20:24:46.259272
+45,oxygen cylinder,6612,hospital4,delivered,False,2024-06-21T02:11:17.259272
+46,ventilator,8,hospital3,pending,True,2024-06-09T18:19:49.259272
+47,masks,195,hospital5,pending,False,2024-06-20T03:33:27.259272
+48,MRI machine,8,hospital5,pending,False,2024-07-01T14:21:00.259272
+49,MRI machine,8,hospital5,delivered,True,2024-06-30T23:08:00.259272
+50,masks,7109,hospital4,pending,False,2024-06-09T21:53:46.259272
+51,medicine,6022,hospital1,processing,False,2024-06-04T16:45:22.259272
+52,medicine,2425,hospital2,processing,False,2024-06-12T00:48:52.259272
+53,oxygen cylinder,669,hospital5,processing,False,2024-06-07T22:39:12.259272
+54,ventilator,4,hospital4,processing,False,2024-06-20T03:17:28.259272
+55,MRI machine,1,hospital1,pending,False,2024-06-06T18:37:21.259272
+56,medicine,2398,hospital4,pending,False,2024-06-14T07:13:20.259272
+57,masks,2211,hospital2,delivered,True,2024-06-28T19:34:39.259272
+58,ventilator,4,hospital1,processing,False,2024-06-10T23:41:24.259272
+59,MRI machine,1,hospital1,pending,True,2024-06-09T15:44:38.259272
+60,medicine,1982,hospital1,pending,False,2024-06-15T02:53:13.259272
+61,MRI machine,9,hospital3,pending,False,2024-06-13T12:25:38.259272
+62,MRI machine,6,hospital4,pending,False,2024-06-29T05:52:48.259272
+63,masks,2306,hospital5,delivered,False,2024-06-18T23:15:11.259272
+64,medicine,3813,hospital2,processing,False,2024-06-09T14:46:13.259272
+65,masks,8613,hospital2,delivered,False,2024-07-05T05:28:29.259272
+66,MRI machine,1,hospital4,processing,False,2024-06-05T09:14:20.259272
+67,oxygen cylinder,1524,hospital4,pending,False,2024-06-26T09:07:26.259272
+68,oxygen cylinder,1447,hospital1,pending,True,2024-06-30T09:24:15.259272
+69,oxygen cylinder,6076,hospital5,delivered,True,2024-06-22T08:00:12.259272
+70,gloves,795,hospital3,processing,False,2024-06-11T12:21:44.259272
+71,ventilator,1,hospital3,pending,False,2024-06-12T19:46:57.259272
+72,ventilator,8,hospital2,delivered,False,2024-06-11T17:36:25.259272
+73,gloves,7626,hospital2,delivered,False,2024-06-27T07:36:41.259272
+74,oxygen cylinder,9742,hospital1,delivered,True,2024-07-02T19:02:54.259272
+75,MRI machine,4,hospital4,delivered,False,2024-06-30T21:38:27.259272
+76,oxygen cylinder,4497,hospital2,delivered,False,2024-06-16T19:00:30.259272
+77,medicine,4100,hospital5,pending,False,2024-06-21T07:32:22.259272
+78,masks,7271,hospital3,processing,False,2024-06-23T03:04:10.259272
+79,MRI machine,6,hospital5,pending,False,2024-06-06T19:11:38.259272
+80,gloves,4547,hospital4,delivered,True,2024-06-12T20:07:55.259272
+81,ventilator,3,hospital1,delivered,True,2024-06-24T12:43:59.259272
+82,medicine,6986,hospital1,delivered,False,2024-06-19T10:17:18.259272
+83,oxygen cylinder,8446,hospital2,pending,True,2024-06-29T07:45:28.259272
+84,masks,721,hospital4,processing,False,2024-07-04T22:06:49.259272
+85,oxygen cylinder,220,hospital4,pending,True,2024-06-21T23:09:07.259272
+86,oxygen cylinder,7768,hospital4,processing,False,2024-06-08T00:58:37.259272
+87,gloves,3358,hospital4,delivered,False,2024-06-18T07:18:57.259272
+88,ventilator,4,hospital2,delivered,True,2024-06-17T20:38:39.259272
+89,masks,8142,hospital4,processing,True,2024-06-19T02:20:25.259272
+90,oxygen cylinder,9949,hospital1,delivered,True,2024-06-07T02:39:50.259272
+91,medicine,2474,hospital1,pending,False,2024-06-12T13:11:39.259272
+92,MRI machine,7,hospital4,processing,False,2024-06-11T02:29:38.259272
+93,oxygen cylinder,2603,hospital5,processing,False,2024-06-06T18:11:26.259272
+94,masks,7091,hospital1,processing,False,2024-06-20T11:51:43.259272
+95,oxygen cylinder,5365,hospital4,processing,True,2024-06-04T18:32:34.259272
+96,medicine,654,hospital2,delivered,True,2024-06-19T03:36:08.259272
+97,oxygen cylinder,7447,hospital4,pending,False,2024-07-02T16:06:58.259272
+98,masks,9505,hospital4,processing,False,2024-07-03T02:28:57.259272
+99,medicine,3057,hospital2,pending,False,2024-06-27T10:51:42.259272
+100,MRI machine,4,hospital1,delivered,False,2024-07-01T17:27:25.259272
