@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to SmartCareConnect!</h1>
+    <p class="lead">This is a simple and efficient platform for hospitals, vendors, and delivery personnel.</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('routes.login') }}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('routes.register') }}" role="button">Register</a>
+</div>
+{% endblock %}

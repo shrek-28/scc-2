@@ -1,0 +1,5 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Bcrypt  # Removed version specification (latest will be installed)
+Flask-Login

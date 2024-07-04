@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Vendor Dashboard{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Vendor Dashboard</h2>
+    <div class="row">
+        <div class="col-md-12">
+            {% for order in orders %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ order.item }}</h5>
+                        <p class="card-text">Amount: {{ order.amount }}</p>
+                        <p class="card-text">Hospital: {{ order.hospital_username }}</p>
+                        <form method="POST" action="{{ url_for('routes.checkout_order', order_id=order.id) }}">
+                            <button type="submit" class="btn btn-primary">Checkout for Delivery</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
