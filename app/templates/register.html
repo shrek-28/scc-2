@@ -1,31 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Register{% endblock %}
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-5">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Register</h5>
-                <form method="POST" action="{{ url_for('routes.register') }}">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.username.label(class="form-control-label") }}
-                        {{ form.username(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.password.label(class="form-control-label") }}
-                        {{ form.password(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.user_type.label(class="form-control-label") }}
-                        {{ form.user_type(class="form-control") }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.submit(class="btn btn-primary") }}
-                    </div>
-                </form>
+<div class="bg-cover bg-center h-screen bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500 flex items-center justify-center">
+<div class="w-full max-w-md">
+    <div class="bg-white shadow-lg rounded-lg p-8 shadow-black">
+        <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
+        <form method="POST" action="{{ url_for('routes.register') }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+                {{ form.username.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.username(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm") }}
             </div>
-        </div>
+            <div class="mb-4">
+                {{ form.password.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.password(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#00ADB5] focus:border[#00ADB5] sm:text-sm") }}
+            </div>
+            <div class="mb-4">
+                {{ form.user_type.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.user_type(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#529a9e] focus:border-[#00ADB5] sm:text-sm") }}
+            </div>
+            <div class="mt-6">
+                {{ form.submit(class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-700 transition duration-150") }}
+            </div>
+        </form>
     </div>
+</div>
 </div>
 {% endblock %}
