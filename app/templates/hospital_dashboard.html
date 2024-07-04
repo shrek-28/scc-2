@@ -1,70 +1,68 @@
 {% extends "base.html" %}
 {% block title %}Hospital Dashboard{% endblock %}
 {% block content %}
-<div class="container mt-4">
-    <h2>SmartCareConnect - For Hospitals</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <h4>Hospital Profile</h4>
+<div class="container mx-auto mt-4">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">SmartCareConnect - For Hospitals</h2>
+            <a href="/logout" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Logout</a>
+        
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Hospital Profile -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h4 class="text-xl font-semibold mb-2">Hospital Profile</h4>
             <p><strong>Name:</strong> {{ current_user.username }}</p>
             <p><strong>Address:</strong> Sample Address</p>
         </div>
-        <div class="col-md-3">
-            <h4>Past Orders</h4>
+        
+        <!-- Past Orders -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h4 class="text-xl font-semibold mb-2">Past Orders</h4>
             {% for order in past_orders %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ order.item }}</h5>
-                        <p class="card-text">Amount: {{ order.amount }}</p>
-                        <p class="card-text">Vendor: {{ order.vendor }}</p>
-                        <form action = "{{url_for('routes.call_del_order', order_id = order.id)}}">
-                            <button type = "submit">del</button>
-                        </form>
-                    </div>
+                <div class="mb-4">
+                    <h5 class="font-bold">{{ order.item }}</h5>
+                    <p>Amount: {{ order.amount }}</p>
+                    <p>Vendor: {{ order.vendor }}</p>
                 </div>
             {% endfor %}
         </div>
-        <div class="col-md-3">
-            <h4>Current Orders</h4>
+        
+        <!-- Current Orders -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h4 class="text-xl font-semibold mb-2">Current Orders</h4>
             {% for order in current_orders %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ order.item }}</h5>
-                        <p class="card-text">Amount: {{ order.amount }}</p>
-                        <p class="card-text">Vendor: {{ order.vendor }}</p>
-                        {% if order.status == "out_for_delivery" %}
-                        <p class="card-text">Out for Delivery!</p>
-                        {% else %}
-                        {% if order.status == "delivered" %}
-                        <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
-                            {{ form.hidden_tag() }}
-                            <button type="submit" class="btn btn-success">Received</button>
-                        </form>
-                        {% endif %}
-                        {% endif %}
-                    </div>
+                <div class="mb-4">
+                    <h5 class="font-bold">{{ order.item }}</h5>
+                    <p>Amount: {{ order.amount }}</p>
+                    <p>Vendor: {{ order.vendor }}</p>
+                    <form method="POST" action="{{ url_for('routes.order_received', order_id=order.id) }}">
+                        {{ form.hidden_tag() }}
+                        <button type="submit" class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600">Received</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
-        <div class="col-md-3">
-            <h4>Place New Order</h4>
+        
+        <!-- Place New Order -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h4 class="text-xl font-semibold mb-2">Place New Order</h4>
             <form method="POST" action="{{ url_for('routes.hospital_dashboard') }}">
                 {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.item.label(class="form-control-label") }}
-                    {{ form.item(class="form-control") }}
+                <div class="mb-4">
+                    {{ form.item.label(class="block text-sm font-medium text-gray-700") }}
+                    {{ form.item(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm") }}
                 </div>
-                <div class="form-group">
-                    {{ form.amount.label(class="form-control-label") }}
-                    {{ form.amount(class="form-control") }}
+                <div class="mb-4">
+                    {{ form.amount.label(class="block text-sm font-medium text-gray-700") }}
+                    {{ form.amount(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm") }}
                 </div>
-                <div class="form-group">
-                    {{ form.urgency.label(class="form-control-label") }}
-                    {{ form.urgency(class="form-control") }}
+                <div class="mb-4">
+                    {{ form.urgency.label(class="block text-sm font-medium text-gray-700") }}
+                    {{ form.urgency(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm") }}
                 </div>
-                <button type="submit" class="btn btn-primary">Place Order</button>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Place Order</button>
             </form>
         </div>
     </div>
-</div>
+</div>>
 {% endblock %}
