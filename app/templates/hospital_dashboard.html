@@ -2,6 +2,14 @@
 {% block title %}Hospital Dashboard{% endblock %}
 {% block style %}
 <style>
+  .body {
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    background: linear-gradient(to right, #393E46, #00ADB5, pink);
+  }
+
+
   .grid-item {
     transition: flex-grow 0.3s ease;
   }
@@ -18,10 +26,36 @@
   .grid-item:not(:hover) {
     flex-grow: 0.85;
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #393E46;
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+    /* Adds a border to give the thumb a "floating" effect */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00ADB5;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+  }
 </style>
 {% endblock %}
 {% block content %}
-<div class="bg-cover bg-center h-full bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500">
+<div class="bg-cover bg-center h-screen bg-gradient-to-r from-[#393E46] via-[#00ADB5] to-pink-500">
   <nav class="bg-gray-800 w-full p-4 flex justify-between items-center mt-0">
     <h1 class="text-white text-2xl font-bold">Hospital Dashboard</h1>
     <a href="/logout"
@@ -42,7 +76,8 @@
       </div>
 
       <!-- Past Orders -->
-      <div class="grid-item bg-gray-50 p-6 rounded-lg shadow-lg shadow-black border bg-opacity-40 border-gray-200">
+      <div
+        class="grid-item bg-gray-50 p-6 rounded-lg shadow-lg shadow-black border bg-opacity-40 border-gray-200 overflow-y-auto h-96 custom-scrollbar">
         <h4 class="text-2xl font-semibold mb-4 text-gray-700 text-center">Past Orders</h4>
         {% for order in past_orders %}
         <div class="mb-6 p-4 bg-white border border-gray-300 rounded-md shadow-sm">
@@ -54,12 +89,14 @@
       </div>
 
       <!-- Current Orders -->
-      <div class="grid-item bg-gray-50 p-6 rounded-lg shadow-lg border shadow-black bg-opacity-40 border-gray-200">
+      <div
+        class="grid-item bg-gray-50 p-6 rounded-lg shadow-lg border shadow-black bg-opacity-40 border-gray-200 overflow-y-auto h-96 custom-scrollbar">
         <h4 class="text-2xl font-semibold mb-4 text-gray-700 text-center">Current Orders</h4>
         {% for order in current_orders %}
         <div class="mb-6 p-4 bg-white border border-gray-300 rounded-md shadow-sm">
           <h5 class="font-bold text-gray-800">{{ order.item }}</h5>
           <p class="text-gray-700">Amount: {{ order.amount }}</p>
+          <p class="text-gray-700">Urgency : {{order.urgency}}</p>
           {% if order.status=='out_for_delivery'%}
           <p class="text-gray-700">Vendor: {{ order.vendor }}</p>
           <p class="text-gray-700">Phone : {{order.phone_no}}</p>
@@ -78,7 +115,7 @@
 
       <!-- Place New Order -->
       <div class="w-80 bg-gray-50 p-6 rounded-lg shadow-lg border shadow-black bg-opacity-40 border-gray-200 mr-3">
-        <h4 class="text-2xl font-semibold mb-4 text-gray-700">Place New Order</h4>
+        <h4 class="text-2xl font-semibold mb-4 text-gray-700 text-center">Place New Order</h4>
         <form method="POST" action="{{ url_for('routes.hospital_dashboard') }}">
           {{ form.hidden_tag() }}
           <div class="mb-4">
@@ -92,15 +129,39 @@
             focus:outline-none focus:ring-aqua-500 focus:border-aqua-500 sm:text-sm") }}
           </div>
           <div class="mb-4">
-            {{ form.urgency.label(class="block text-sm font-medium text-gray-700") }}
-            {{ form.urgency(class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-            focus:outline-none focus:ring-aqua-500 focus:border-aqua-500 sm:text-sm mr-10") }}
+            <div class="mb-4">
+              <label for="urgency" class="block text-sm font-medium text-gray-700">Urgency [From High to Low]</label>
+              <div class="mt-1 flex space-x-2">
+                <button type="button" onclick="setUrgency(1)"
+                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">1</button>
+
+                <button type="button" onclick="setUrgency(2)"
+                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">2</button>
+                <button type="button" onclick="setUrgency(3)"
+                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">3</button>
+                <button type="button" onclick="setUrgency(4)"
+                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">4</button>
+              </div>
+              <input type="hidden" id="urgency" name="urgency">
+            </div>
           </div>
-          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Place
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-3">Place
             Order</button>
+          
         </form>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+  <script>
+    function setUrgency(value) {
+        document.getElementById('urgency').value = value;
+        // Optionally, add some visual feedback for the selected button
+        document.querySelectorAll('button').forEach(button => {
+            button.classList.remove('bg-blue-500', 'text-white');
+            button.classList.add('bg-gray-300', 'text-gray-800');
+        });
+        document.querySelector(`button[onclick="setUrgency(${value})"]`).classList.remove('bg-gray-300', 'text-gray-800');
+        document.querySelector(`button[onclick="setUrgency(${value})"]`).classList.add('bg-blue-500', 'text-white');
+    }
+    </script>
+  {% endblock %}

@@ -24,7 +24,7 @@ class Order(db.Model):
     amount = db.Column(db.Float, nullable=False)
     hospital_username = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
     status = db.Column(db.String(50), nullable=False, default='current')
-    urgency = db.Column(db.Boolean, default=False)
+    urgency = db.Column(db.Integer, default=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     vendor = db.Column(db.String(80), nullable = True)
     phone_no = db.Column(db.String(10),nullable = True)

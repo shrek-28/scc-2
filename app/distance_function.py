@@ -8,7 +8,7 @@ address1 = "address1"
 address2 = "address2"
 
 # Geocode the address
-def geolocator(address1, address2):
+def locator(address1, address2):
     location1 = geolocator.geocode(address1)
     location2 = geolocator.geocode(address2)
     lat1 = location1.latitude
@@ -20,4 +20,4 @@ def geolocator(address1, address2):
     destination = (lat2, lon2)
 
     distance = geodesic(origin, destination).km
-    return distance
+    return round(distance,2)

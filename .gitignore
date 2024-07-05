@@ -1,2 +1,5 @@
 
 instance/site.db
+instance/site.db
+migrations/__pycache__/env.cpython-311.pyc
+migrations/__pycache__/env.cpython-312.pyc

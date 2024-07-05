@@ -4,6 +4,7 @@ from app import db, bcrypt
 from app.models import User, Order
 from app.forms import RegistrationForm, LoginForm, OrderForm, AddressEmailForm
 from sqlalchemy import or_
+from .distance_function import locator
 
 bp = Blueprint('routes', __name__)
 @bp.route("/")
@@ -119,12 +120,10 @@ def vendor_dashboard():
     if current_user.user_type != 'vendor':
         return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='current').all()
-    i = 4
     for order in orders:
-        order.distance = i
-        i = i-1
-
-    orders = Order.query.filter_by(status='current').order_by(Order.distance).all()    
+        hospital = User.query.filter(User.username == order.hospital_username).one()
+        order.distance = locator(hospital.address,current_user.address)        
+    orders = Order.query.filter_by(status='current').order_by(Order.urgency, Order.distance).all()    
     return render_template('vendor_dashboard.html', title='Vendor Dashboard', orders=orders)
 
 @bp.route("/delivery_dashboard")
