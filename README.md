@@ -1,5 +1,4 @@
 # scc-2
-# scc-2
 <h1>SmartCareConnect - README</h1>
 
 Project Description
