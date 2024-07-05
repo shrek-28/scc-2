@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, FloatField, EmailField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, FloatField, EmailField, IntegerField
 from wtforms.validators import DataRequired, Length, ValidationError, Email
 from app.models import User
 
@@ -28,6 +28,6 @@ class LoginForm(FlaskForm):
 class OrderForm(FlaskForm):
     item = StringField('Item', validators=[DataRequired()])
     amount = FloatField('Amount', validators=[DataRequired()])
-    urgency = BooleanField('Urgency')
+    urgency = IntegerField('Urgency')
     submit = SubmitField('Place Order')
 
