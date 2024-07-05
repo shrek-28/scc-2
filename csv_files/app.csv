@@ -1,4 +1,4 @@
-id,item,amount,hospital_username,status,urgency,timestamp
+id,item,number_of_items,hospital_username,status,urgency,timestamp
 1,Margherita Pizza,2.0,hospital3,past,True,2024-07-04T10:16:09.714464
 2,Mri machine ,4.0,hospital3,past,True,2024-07-04T10:17:50.365515
 3,paracetamol,3.0,hospital3,past,True,2024-07-04T10:18:45.664221
