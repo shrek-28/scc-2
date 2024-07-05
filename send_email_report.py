@@ -1,12 +1,11 @@
-# Import necessary libraries
-import pandas as pd  # For handling data in DataFrame format
-import joblib  # For loading pre-trained models
-import numpy as np  # For numerical operations
-import smtplib  # For sending emails
-from email.mime.text import MIMEText  # For creating the text part of the email
-from email.mime.multipart import MIMEMultipart  # For creating the complete email message
-import schedule  # For scheduling tasks
-import time  # For sleeping between scheduled tasks
+import pandas as pd  
+import joblib  
+import numpy as np  
+import smtplib  
+from email.mime.text import MIMEText  
+from email.mime.multipart import MIMEMultipart 
+import schedule 
+import time  
 from app.models import User
 
 user = User()
@@ -27,53 +26,52 @@ def send_email_report():
     test_data_encoded['rolling_mean_amount'] = test_data_encoded['amount'].rolling(window=3).mean()  # Create rolling mean feature
     test_data_encoded = test_data_encoded.dropna().reset_index(drop=True)  # Drop NaN values due to shifting and rolling
     
-    # Prepare the features for prediction
+    
     features = [col for col in test_data_encoded.columns if col not in ['id', 'amount', 'hospital_username', 'timestamp']]  # Select feature columns
     
-    X_test = test_data_encoded[features]  # Extract features from the test data
+    X_test = test_data_encoded[features]  
     
-    # Predict item type and amount
-    y_pred_item = clf.predict(X_test)  # Predict item types
-    y_pred_amount = reg.predict(X_test)  # Predict amounts
     
-    # Round predicted amounts to the nearest whole number
-    y_pred_amount = np.round(y_pred_amount).astype(int)  # Convert predictions to integers
+    y_pred_item = clf.predict(X_test)  
+    y_pred_amount = reg.predict(X_test)  
     
-    # Combine item predictions into a single column
-    item_columns = [col for col in test_data_encoded.columns if col.startswith('item_')]  # List of item columns
-    pred_item_df = pd.DataFrame(y_pred_item, columns=item_columns)  # Convert predictions to DataFrame
-    predicted_item = pred_item_df.idxmax(axis=1).str.replace('item_', '')  # Get the predicted item names
     
-    # Create a DataFrame for predictions
+    y_pred_amount = np.round(y_pred_amount).astype(int) 
+    
+    
+    item_columns = [col for col in test_data_encoded.columns if col.startswith('item_')]  
+    pred_item_df = pd.DataFrame(y_pred_item, columns=item_columns)  
+    predicted_item = pred_item_df.idxmax(axis=1).str.replace('item_', '')  
+    
+    
     predictions = pd.DataFrame({
-        'predicted_item': predicted_item,  # Predicted item types
-        'predicted_amount': y_pred_amount  # Predicted amounts
+        'predicted_item': predicted_item, 
+        'predicted_amount': y_pred_amount 
     })
     
-    # Generate the email content
-    email_body = predictions.to_csv(index=False)  # Convert predictions DataFrame to CSV format for email body
     
-    # Define email parameters
+    email_body = predictions.to_csv(index=False)  
+    
+    
     sender_email = 'shreyagopal28@gmail.com' 
     password = 'zbvk hgen esgv vdjb'
-  # Replace with your email address
-    receiver_email =  'naman.dsce@gmail.com' # Replace with the hospital's email address
-     # Replace with your email account password
+  
+    receiver_email =  User.email 
     
     # Create the email message
-    msg = MIMEMultipart()  # Create a multipart email message
-    msg['From'] = sender_email  # Set the sender's email address
-    msg['To'] = receiver_email  # Set the recipient's email address
-    msg['Subject'] = 'Daily Order Prediction Report'  # Set the subject of the email
+    msg = MIMEMultipart()  
+    msg['From'] = sender_email  
+    msg['To'] = receiver_email  
+    msg['Subject'] = 'Daily Order Prediction Report'  
     
-    # Attach the email body
+    
     msg.attach(MIMEText('Here is the daily order prediction report:\n\n' + email_body, 'plain'))
     
-    # Send the email
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:  # Connect to the SMTP server (replace with your SMTP server details)
-        server.starttls()  # Upgrade the connection to a secure encrypted SSL/TLS connection
-        server.login(sender_email, password)  # Log in to the SMTP server
-        server.send_message(msg)  # Send the email message
+   
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:  
+        server.starttls()  
+        server.login(sender_email, password)  
+        server.send_message(msg)  
 
 print("done")
 
