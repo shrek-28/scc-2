@@ -119,6 +119,12 @@ def vendor_dashboard():
     if current_user.user_type != 'vendor':
         return redirect(url_for('routes.access_denied'))
     orders = Order.query.filter_by(status='current').all()
+    i = 4
+    for order in orders:
+        order.distance = i
+        i = i-1
+
+    orders = Order.query.filter_by(status='current').order_by(Order.distance).all()    
     return render_template('vendor_dashboard.html', title='Vendor Dashboard', orders=orders)
 
 @bp.route("/delivery_dashboard")

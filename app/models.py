@@ -28,6 +28,7 @@ class Order(db.Model):
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     vendor = db.Column(db.String(80), nullable = True)
     phone_no = db.Column(db.String(10),nullable = True)
+    distance = db.Column(db.Integer, nullable = True)
 
     def __repr__(self):
         return f"Order('{self.item}', '{self.amount}', '{self.status}')"
