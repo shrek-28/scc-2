@@ -1,5 +1,7 @@
 Flask
 Flask-SQLAlchemy
+Flask_Bcrypt
+Flask_login
 Flask-WTF
 WTForms
 Flask-Mail
@@ -11,3 +13,4 @@ scikit-learn==1.0.2
 joblib
 schedule
 geopy
+email_validator

@@ -4,9 +4,6 @@ from geopy.distance import geodesic
 
 geolocator = OpenCage(api_key='e2c41cac1abd48929b9bafb46bd619df')
 
-address1 = "address1"
-address2 = "address2"
-
 # Geocode the address
 def locator(address1, address2):
     location1 = geolocator.geocode(address1)

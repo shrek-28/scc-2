@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} hello {% endblock %}
+{% block title %} SmartCareConnect {% endblock %}
 {% block style %} 
 <style>
 .hidden {
@@ -16,7 +16,7 @@
 {% block content %}
 <div class="h-20 bg-[#222831] text-white flex items-center justify-between px-10 sticky top-0 transition-all duration-300 bg-opacity-100" id="navbar">
     <div class="logo flex items-center">
-      <img class="mr-4 h-10 w-10 rounded-full" src="" alt="Logo" />
+      <img class="mr-4 h-10 w-10 rounded-full" src="{{ url_for('static', filename='logo.png') }}" alt="Logo" />
       <p class="text-2xl font-bold ml-2">SmartCareConnect</p>
     </div>
     <div class="list flex space-x-4">
